@@ -1,4 +1,4 @@
-# cobra-plus
+# cobra+
 
 Sistema de gestão de cobranças.
 
@@ -11,23 +11,26 @@ Sistema de gestão de cobranças.
 
 ## funcionalidades (em progresso)
 
-* clientes
-* contratos
-* parcelas
-* dashboard
-* cobranças do dia
+- [x] estrutura inicial do frontend
+- [x] layout base (sidebar + área principal)
+- [x] módulo de dashboard criado
+- [ ] cards de métricas
+- [ ] lista de cobranças do dia
+- [ ] gestão de clientes
+- [ ] contratos e parcelas
 
 ## estrutura
 
-```
 src/
-  components/
-  pages/
-  hooks/
-  context/
+  app/
+  modules/
+    dashboard/
+  shared/
+    components/
+      layout/
+  assets/
   styles/
   types/
-```
 
 ## rodando o projeto
 
