@@ -1,10 +1,11 @@
+import { MainLayout } from "./shared/components/layout/MainLayout";
+import { Dashboard } from "./modules/dashboard/pages/Dashboard";
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <h1 className="text-3xl font-bold text-primary">
-        Cobra+ funcionando 
-      </h1>
-    </div>
+    <MainLayout>
+      <Dashboard />
+    </MainLayout>
   );
 }
 
