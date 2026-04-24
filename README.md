@@ -1,73 +1,145 @@
-# React + TypeScript + Vite
+# 💰 Cobra+
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema inteligente de gestão de cobranças com foco em **ação rápida, automação e controle financeiro em tempo real**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Visão do Produto
 
-## React Compiler
+O **Cobra+** não é apenas um dashboard financeiro.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+É uma **máquina de cobrança** projetada para:
 
-## Expanding the ESLint configuration
+* Reduzir inadimplência
+* Automatizar cobranças
+* Centralizar contratos e pagamentos
+* Aumentar eficiência operacional
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🧠 Proposta de Valor
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+> Abra o sistema → veja quem cobrar → cobre em 1 clique
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Sem fricção. Sem perda de tempo.
+
+---
+
+## 🎯 Funcionalidades (Roadmap)
+
+### 🔹 MVP (em desenvolvimento)
+
+* [x] Setup inicial com React + TypeScript + Tailwind
+* [ ] Dashboard com métricas principais
+* [ ] Gestão de clientes
+* [ ] Gestão de contratos
+* [ ] Controle de parcelas
+* [ ] Lista de cobranças do dia
+
+---
+
+### ⚡ V2
+
+* [ ] Integração com WhatsApp (envio de cobrança)
+* [ ] Geração de cobrança via PIX
+* [ ] Histórico de pagamentos
+
+---
+
+### 🧠 V3
+
+* [ ] Automação de cobrança
+* [ ] Score de clientes (risco de inadimplência)
+* [ ] Relatórios avançados
+
+---
+
+## 🧱 Stack Tecnológica
+
+### Frontend
+
+* React
+* TypeScript
+* Tailwind CSS
+* Vite
+
+### Backend (planejado)
+
+* Node.js
+* Prisma ORM
+* PostgreSQL
+
+### Integrações (planejado)
+
+* WhatsApp API
+* PIX API
+
+---
+
+## 📂 Estrutura do Projeto
+
+```bash
+src/
+ ├── components/
+ ├── pages/
+ ├── hooks/
+ ├── context/
+ ├── styles/
+ └── types/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Como rodar o projeto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# instalar dependências
+npm install
+
+# rodar projeto
+npm run dev
 ```
+
+---
+
+## 🌐 Acesso
+
+```bash
+http://localhost:5173
+```
+
+---
+
+## 🧪 Status do Projeto
+
+🚧 Em desenvolvimento ativo
+
+---
+
+## 🧠 Filosofia do Projeto
+
+O Cobra+ segue três princípios:
+
+1. **Clareza > Complexidade**
+2. **Ação > Visual**
+3. **Automação > Trabalho manual**
+
+---
+
+## 📌 Roadmap Estratégico
+
+* MVP funcional → validação
+* Integrações reais → valor de mercado
+* Escala SaaS → monetização
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Roberto Gabriel**
+
+---
+
+## 📄 Licença
+
+MIT
