@@ -14,7 +14,7 @@ Sistema de gestão de cobranças.
 - [x] estrutura inicial do frontend
 - [x] layout base (sidebar + área principal)
 - [x] módulo de dashboard criado
-- [ ] cards de métricas
+- [x] cards de métricas
 - [ ] lista de cobranças do dia
 - [ ] gestão de clientes
 - [ ] contratos e parcelas
@@ -25,9 +25,11 @@ src/
   app/
   modules/
     dashboard/
+      pages/
   shared/
     components/
       layout/
+      ui/
   assets/
   styles/
   types/
