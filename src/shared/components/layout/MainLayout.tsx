@@ -1,3 +1,36 @@
+import {
+  LayoutDashboard,
+  Users,
+  FileText,
+  CreditCard,
+  Calendar,
+} from "lucide-react";
+
+const menuItems = [
+  {
+    label: "Dashboard",
+    icon: LayoutDashboard,
+    active: true,
+  },
+  {
+    label: "Clientes",
+    icon: Users,
+  },
+  {
+    label: "Contratos",
+    icon: FileText,
+  },
+  {
+    label: "Cobranças",
+    icon: CreditCard,
+  },
+  {
+    label: "Calendário",
+    icon: Calendar,
+  },
+];
+
+
 export function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-black">
@@ -11,36 +44,25 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
 
   <nav className="flex-1 p-4 mt-4">
     <ul className="space-y-2">
-      <li>
-        <button className="w-full text-left px-4 py-3 rounded-lg bg-blue-50 text-primary font-medium">
-          Dashboard
-        </button>
-      </li>
+  {menuItems.map((item) => {
+    const Icon = item.icon;
 
-      <li>
-        <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100">
-          Clientes
+    return (
+      <li key={item.label}>
+        <button
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
+            item.active
+              ? "bg-blue-50 text-primary font-medium"
+              : "hover:bg-gray-100"
+          }`}
+        >
+          <Icon size={18} />
+          {item.label}
         </button>
       </li>
-
-      <li>
-        <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100">
-          Contratos
-        </button>
-      </li>
-
-      <li>
-        <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100">
-          Cobranças
-        </button>
-      </li>
-
-      <li>
-        <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100">
-          Calendário
-        </button>
-      </li>
-    </ul>
+    );
+  })}
+</ul>
   </nav>
 </aside>
 
@@ -48,44 +70,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
-    </div>
-  );
-}type Props = {
-  title: string;
-  value: string;
-  description?: string;
-  variant?: "default" | "alert";
-};
-
-export function MetricCard({
-  title,
-  value,
-  description,
-  variant = "default",
-}: Props) {
-  const isAlert = variant === "alert";
-
-  return (
-    <div
-      className={`border rounded-xl p-4 shadow-sm ${
-        isAlert
-          ? "bg-orange-50 border-orange-300"
-          : "bg-white border-gray-200"
-      }`}
-    >
-      <span className="text-sm text-gray-500">{title}</span>
-
-      <h2
-        className={`text-2xl font-bold ${
-          isAlert ? "text-orange-600" : "text-primary"
-        }`}
-      >
-        {value}
-      </h2>
-
-      {description && (
-        <p className="text-xs text-gray-400 mt-1">{description}</p>
-      )}
     </div>
   );
 }
