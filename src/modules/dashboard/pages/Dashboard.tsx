@@ -68,9 +68,19 @@ export function Dashboard() {
         {charge.amount}
       </span>
 
-      <span className="text-orange-600">
-        {charge.status}
-      </span>
+      <div>
+  <span
+    className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
+      charge.status === "atrasado"
+        ? "bg-red-100 text-red-700"
+        : charge.status === "pendente"
+        ? "bg-yellow-100 text-yellow-700"
+        : "bg-green-100 text-green-700"
+    }`}
+  >
+    {charge.status}
+  </span>
+</div>
 
       <div>
         <button className="text-blue-600 hover:underline">
