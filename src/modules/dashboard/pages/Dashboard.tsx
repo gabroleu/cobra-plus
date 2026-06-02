@@ -37,35 +37,49 @@ export function Dashboard() {
 
       <section className="bg-white border border-gray-200 rounded-xl p-6">
   <h2 className="text-lg font-semibold mb-4">
+    
     Cobranças do Dia
   </h2>
 
-  <div className="space-y-3">
-    {charges.map((charge) => (
-      <div
-        key={charge.id}
-        className="flex items-center justify-between border-b border-gray-100 pb-3"
-      >
-        <div>
-          <p className="font-medium">{charge.client}</p>
+    <div className="grid grid-cols-5 gap-4 pb-3 border-b text-sm font-medium text-gray-500">
+        <span>Cliente</span>
+        <span>Vencimento</span>
+        <span>Valor</span>
+        <span>Status</span>
+        <span>Ações</span>
+    </div>
 
-          <p className="text-sm text-gray-500">
-            Vencimento: {charge.dueDate}
-          </p>
-        </div>
 
-        <div className="text-right">
-          <p className="font-semibold">
-            {charge.amount}
-          </p>
+  <div>
+  {charges.map((charge) => (
+    <div
+      key={charge.id}
+      className="grid grid-cols-5 gap-4 py-4 border-b border-gray-100 items-center"
+    >
+      <span className="font-medium">
+        {charge.client}
+      </span>
 
-          <span className="text-sm text-orange-600">
-            {charge.status}
-          </span>
-        </div>
+      <span className="text-gray-500">
+        {charge.dueDate}
+      </span>
+
+      <span className="font-semibold">
+        {charge.amount}
+      </span>
+
+      <span className="text-orange-600">
+        {charge.status}
+      </span>
+
+      <div>
+        <button className="text-blue-600 hover:underline">
+          Ver
+        </button>
       </div>
-    ))}
-  </div>
+    </div>
+  ))}
+</div>
 </section>
 
 
