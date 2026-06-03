@@ -82,11 +82,13 @@ export function Dashboard() {
   </span>
 </div>
 
+      
       <div>
-        <button className="text-blue-600 hover:underline">
-          Ver
-        </button>
-      </div>
+  <button className="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition">
+    Cobrar
+  </button>
+</div>
+
     </div>
   ))}
 </div>
