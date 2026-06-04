@@ -13,15 +13,17 @@ export function Dashboard() {
           </h1>
 
         <p className="text-sm text-slate-500 mt-1">
-            Acompanhe cobranças, contratos e indicadores financeiros.
+            Acompanhe cobranças, contratos e receba+.
         </p>
       </div>
 
-      <div className="text-right">
-        <p className="text-sm text-slate-500">
-            Atualizado agora
-        </p>
-      </div>
+      <div className="flex items-center gap-2">
+  <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+
+  <span className="text-sm text-slate-500 font-medium">
+    Online
+  </span>
+</div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
