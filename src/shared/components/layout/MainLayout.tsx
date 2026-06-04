@@ -9,6 +9,7 @@ import {
   PlusSquare,
   LifeBuoy,
   Moon,
+  Menu,
 } from "lucide-react";
 
 const menuItems = [
@@ -48,7 +49,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-black">
       <div className="flex">
-        <aside className="w-64 h-screen border-r bg-white flex flex-col">
+        <aside className="hidden md:flex md:w-64 h-screen border-r bg-white flex-col">
   <div className="p-6 border-b">
     <h1 className="text-3xl font-extrabold text-primary">
       Cobra+
@@ -105,7 +106,12 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
 </div>
 </aside>
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 md:p-6">
+          <div className="md:hidden mb-4">
+  <button className="p-2 rounded-lg border border-gray-200 bg-white">
+    <Menu size={22} />
+  </button>
+</div>
           {children}
         </main>
       </div>
