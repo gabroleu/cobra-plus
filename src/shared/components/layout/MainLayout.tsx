@@ -46,7 +46,17 @@ const menuItems = [
 ];
 
 
-export function MainLayout({ children }: { children: React.ReactNode }) {
+type MainLayoutProps = {
+  children: React.ReactNode;
+  currentPage: string;
+  setCurrentPage: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export function MainLayout({
+  children,
+  currentPage,
+  setCurrentPage,
+}: MainLayoutProps) {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -68,12 +78,22 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     return (
       <li key={item.label}>
         <button
-          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-            item.active
-              ? "bg-blue-50 text-primary font-medium"
-              : "hover:bg-gray-100"
-          }`}
-        >
+  onClick={() => {
+    if (item.label === "Dashboard") {
+      setCurrentPage("dashboard");
+    }
+
+    if (item.label === "Clientes") {
+      setCurrentPage("clients");
+    }
+  }}
+  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
+    (item.label === "Dashboard" && currentPage === "dashboard") ||
+    (item.label === "Clientes" && currentPage === "clients")
+      ? "bg-blue-50 text-primary font-medium"
+      : "hover:bg-gray-100"
+  }`}
+>
           <Icon size={18} />
           {item.label}
         </button>
@@ -143,6 +163,15 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             return (
               <li key={item.label}>
                 <button
+                  onClick={() => {
+                    if (item.label === "Dashboard") {
+                      setCurrentPage("dashboard");
+                    }
+
+                    if (item.label === "Clientes") {
+                      setCurrentPage("clients");
+                    }
+                  }}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
                     item.active
                       ? "bg-blue-50 text-primary font-medium"
