@@ -1,3 +1,4 @@
+import {  useState } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -46,6 +47,9 @@ const menuItems = [
 
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-black">
       <div className="flex">
@@ -107,13 +111,70 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
 </aside>
 
         <main className="flex-1 p-4 md:p-6">
-          <div className="md:hidden mb-4">
-  <button className="p-2 rounded-lg border border-gray-200 bg-white">
-    <Menu size={22} />
-  </button>
-</div>
-          {children}
-        </main>
+  <div className="md:hidden mb-4">
+    <button
+      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      className="p-2 rounded-lg border border-gray-200 bg-white"
+    >
+      <Menu size={22} />
+    </button>
+  </div>
+
+  {mobileMenuOpen && (
+  <div className="md:hidden fixed inset-0 z-50">
+    
+    <div
+      className="absolute inset-0 bg-black/30"
+      onClick={() => setMobileMenuOpen(false)}
+    />
+
+    <div className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl border-r flex flex-col">
+      <div className="p-6 border-b">
+        <h2 className="text-2xl font-bold text-primary">
+          Cobra+
+        </h2>
+      </div>
+
+      <nav className="p-4">
+        <ul className="space-y-2">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <li key={item.label}>
+                <button
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
+                    item.active
+                      ? "bg-blue-50 text-primary font-medium"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  
+                  <Icon size={18} />
+                  {item.label}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <div className="mt-auto border-t p-4">
+        <p className="font-semibold">
+          Gabriel Chaves
+       </p>
+
+        <p className="text-sm text-gray-500">
+          Administrador
+        </p>
+      </div>
+    </div>
+
+  </div>
+)}
+
+  {children}
+</main>
       </div>
     </div>
   );
