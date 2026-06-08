@@ -1,3 +1,5 @@
+import { clients } from "../data/clients";
+
 export function Clients() {
   return (
     <div className="space-y-6">
@@ -22,9 +24,53 @@ export function Clients() {
           </button>
         </div>
 
-        <div className="text-center py-16 text-gray-400">
-          Nenhum cliente cadastrado
-        </div>
+        <div className="overflow-x-auto">
+  <table className="w-full">
+    <thead>
+      <tr className="border-b border-gray-200 text-left">
+        <th className="pb-3">Nome</th>
+        <th className="pb-3">Telefone</th>
+        <th className="pb-3">Status</th>
+        <th className="pb-3">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {clients.map((client) => (
+        <tr
+          key={client.id}
+          className="border-b border-gray-100"
+        >
+          <td className="py-4">
+            {client.name}
+          </td>
+
+          <td className="py-4">
+            {client.phone}
+          </td>
+
+          <td className="py-4">
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-medium ${
+                client.status === "Ativo"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {client.status}
+            </span>
+          </td>
+
+          <td className="py-4">
+            <button className="text-primary hover:underline">
+              Ver
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
       </section>
     </div>
   );
