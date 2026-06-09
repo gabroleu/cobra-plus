@@ -86,10 +86,16 @@ export function MainLayout({
     if (item.label === "Clientes") {
       setCurrentPage("clients");
     }
+
+    if (item.label === "Contratos") {
+      setCurrentPage("contracts");
+} 
+
   }}
   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
     (item.label === "Dashboard" && currentPage === "dashboard") ||
-    (item.label === "Clientes" && currentPage === "clients")
+    (item.label === "Clientes" && currentPage === "clients") ||
+    (item.label === "Contratos" && currentPage === "contracts")
       ? "bg-blue-50 text-primary font-medium"
       : "hover:bg-gray-100"
   }`}
@@ -165,17 +171,26 @@ export function MainLayout({
                 <button
                   onClick={() => {
                     if (item.label === "Dashboard") {
-                      setCurrentPage("dashboard");
-                    }
+                    setCurrentPage("dashboard");
+                    setMobileMenuOpen(false);
+              }
 
                     if (item.label === "Clientes") {
-                      setCurrentPage("clients");
-                    }
-                  }}
+                    setCurrentPage("clients");
+                    setMobileMenuOpen(false);
+              }
+
+                    if (item.label === "Contratos") {
+                    setCurrentPage("contracts");
+                    setMobileMenuOpen(false);
+              }
+            }}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                    item.active
-                      ? "bg-blue-50 text-primary font-medium"
-                      : "hover:bg-gray-100"
+                    (item.label === "Dashboard" && currentPage === "dashboard") ||
+                    (item.label === "Clientes" && currentPage === "clients") ||
+                    (item.label === "Contratos" && currentPage === "contracts")
+                    ? "bg-blue-50 text-primary font-medium"
+                    : "hover:bg-gray-100"
                   }`}
                 >
                   
