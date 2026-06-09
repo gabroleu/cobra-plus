@@ -1,8 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { clients } from "../data/clients";
+
+  type Client = {
+    id: string;
+    name: string;
+    phone: string;
+    status: string;
+  };
 
 export function Clients() {
   const [showModal, setShowModal] = useState(false);
+  const [clientsList, setClientsList] = useState<Client[]>(() => {
+    const savedClients = localStorage.getItem("cobra_clients");
+
+    if(savedClients) {
+      return JSON.parse(savedClients) as Client[];
+    }
+
+    return clients;
+});
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+    useEffect(() => {
+    localStorage.setItem("cobra_clients", JSON.stringify(clientsList));
+  }, [clientsList]);
+
+  function handleAddClient() {
+    if (!name.trim() || !phone.trim()) {
+      return;
+    }
+
+    const newClient = {
+      id: Date.now().toString(),
+      name,
+      phone,
+      status: "Ativo",
+    };
+
+    setClientsList((prev: Client[]) => [...prev, newClient]);
+    setName("");
+    setPhone("");
+    setShowModal(false);
+  }
 
   return (
     <div className="space-y-6">
@@ -42,7 +83,7 @@ export function Clients() {
     </thead>
 
     <tbody>
-      {clients.map((client) => (
+      {clientsList.map((client) => (
         <tr
           key={client.id}
           className="border-b border-gray-100"
@@ -104,6 +145,8 @@ export function Clients() {
 
     <input
       type="text"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
       className="w-full border border-gray-300 rounded-lg px-3 py-2"
       placeholder="Digite o nome"
     />
@@ -116,6 +159,8 @@ export function Clients() {
 
     <input
       type="text"
+      value={phone}
+      onChange={(e) => setPhone(e.target.value)}
       className="w-full border border-gray-300 rounded-lg px-3 py-2"
       placeholder="(92) 99999-9999"
     />
@@ -130,6 +175,7 @@ export function Clients() {
     </button>
 
     <button
+      onClick={handleAddClient}
       className="px-4 py-2 bg-primary text-white rounded-lg"
     >
       Salvar
