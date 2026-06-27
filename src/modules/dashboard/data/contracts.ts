@@ -19,5 +19,6 @@ export const contracts = [
         client: "Roberto Gabriel",
         amount: "R$ 420,00",
         dueDate: "20/07/2026",
+        status: "Inativo"
     }
 ]
