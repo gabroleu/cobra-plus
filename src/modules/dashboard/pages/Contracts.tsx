@@ -1,7 +1,66 @@
+import { useEffect, useState } from "react";
 import { contracts } from "../data/contracts"; 
+
+type Contract = {
+  id: string;
+  client: string;
+  amount: string;
+  dueDate: string;
+  status: string;
+};
 
 
 export function Contracts() {
+  const [showModal, setShowModal] = useState(false);
+  const [contractsList, setContractsList] = useState<Contract[]>(() => {
+  const savedContracts = localStorage.getItem("cobra_contracts");
+
+  if (savedContracts) {
+    return JSON.parse(savedContracts) as Contract[];
+  }
+
+  return contracts;
+});
+
+  const [client, setClient] = useState("");
+  const [amount, setAmount] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [status, setStatus] = useState("Ativo");
+
+  useEffect(() => {
+  localStorage.setItem(
+    "cobra_contracts",
+    JSON.stringify(contractsList)
+  );
+}, [contractsList]);
+
+function handleAddContract() {
+  if (
+    !client.trim() ||
+    !amount.trim() ||
+    !dueDate.trim()
+  ) {
+    return;
+  }
+
+  const newContract: Contract = {
+    id: Date.now().toString(),
+    client,
+    amount,
+    dueDate,
+    status,
+  };
+
+  setContractsList((prev) => [...prev, newContract]);
+
+  setClient("");
+  setAmount("");
+  setDueDate("");
+  setStatus("Ativo");
+
+  setShowModal(false);
+}
+
   return (
     <div className="space-y-6">
       <div>
@@ -20,7 +79,10 @@ export function Contracts() {
             Lista de Contratos
           </h2>
 
-          <button className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90">
+          <button
+            onClick={() => setShowModal(true)}
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90"
+          >
             Novo Contrato
           </button>
         </div>
@@ -38,7 +100,7 @@ export function Contracts() {
     </thead>
 
     <tbody>
-      {contracts.map((contract) => (
+      {contractsList.map((contract) => (
         <tr
           key={contract.id}
           className="border-b border-gray-100"
@@ -78,6 +140,109 @@ export function Contracts() {
   </table>
 </div>
       </section>
+
+        {showModal && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+    <div className="bg-white rounded-xl p-6 w-full max-w-lg">
+
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-xl font-semibold">
+          Novo Contrato
+        </h2>
+
+        <button
+          onClick={() => setShowModal(false)}
+          className="text-gray-500 hover:text-gray-700"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="space-y-4">
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Cliente
+    </label>
+
+    <select
+  value={client}
+  onChange={(e) => setClient(e.target.value)}
+  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+>
+  <option value="">Selecione um cliente</option>
+  <option>Gabriel Silva</option>
+  <option>Gabriel Chaves</option>
+  <option>Roberto Gabriel</option>
+</select>
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Valor
+    </label>
+
+    <input
+      type="text"
+      value={amount}
+      onChange={(e) => setAmount(e.target.value)}
+      placeholder="R$ 0,00"
+      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Vencimento
+    </label>
+
+    <input
+      type="date"
+      value={dueDate}
+      onChange={(e) => setDueDate(e.target.value)}
+      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Status
+    </label>
+
+    <select
+      value={status}
+      onChange={(e) => setStatus(e.target.value)}
+      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+    >
+  <option>Ativo</option>
+  <option>Inativo</option>
+</select>
+  </div>
+
+  <div className="flex justify-end gap-2 pt-2">
+    <button
+      onClick={() => setShowModal(false)}
+      className="px-4 py-2 border rounded-lg"
+    >
+      Cancelar
+    </button>
+
+    <button
+  onClick={handleAddContract}
+  className="px-4 py-2 bg-primary text-white rounded-lg"
+>
+  Salvar
+</button>
+  </div>
+
+</div>
+
+    </div>
+  </div>
+)}
+
+
+
     </div>
   );
 }
