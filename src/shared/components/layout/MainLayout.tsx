@@ -90,12 +90,16 @@ export function MainLayout({
     if (item.label === "Contratos") {
       setCurrentPage("contracts");
 } 
+    if (item.label === "Cobranças") {
+      setCurrentPage("charges");
+    }
 
   }}
   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
     (item.label === "Dashboard" && currentPage === "dashboard") ||
     (item.label === "Clientes" && currentPage === "clients") ||
-    (item.label === "Contratos" && currentPage === "contracts")
+    (item.label === "Contratos" && currentPage === "contracts") ||
+    (item.label === "Cobranças" && currentPage === "charges")
       ? "bg-blue-50 text-primary font-medium"
       : "hover:bg-gray-100"
   }`}
@@ -184,11 +188,17 @@ export function MainLayout({
                     setCurrentPage("contracts");
                     setMobileMenuOpen(false);
               }
+
+                    if (item.label === "Cobranças") {
+                      setCurrentPage("charges");
+                      setMobileMenuOpen(false);
+                    }
             }}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
                     (item.label === "Dashboard" && currentPage === "dashboard") ||
                     (item.label === "Clientes" && currentPage === "clients") ||
-                    (item.label === "Contratos" && currentPage === "contracts")
+                    (item.label === "Contratos" && currentPage === "contracts") ||
+                    (item.label === "Cobranças" && currentPage === "charges")
                     ? "bg-blue-50 text-primary font-medium"
                     : "hover:bg-gray-100"
                   }`}
