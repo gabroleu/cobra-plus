@@ -1,3 +1,4 @@
+import { charges } from "../data/charges";
 export function Charges() {
   return (
     <div className="space-y-6">
@@ -22,9 +23,65 @@ export function Charges() {
           </button>
         </div>
 
-        <div className="text-center py-16 text-gray-400">
-          Nenhuma cobrança cadastrada
-        </div>
+        <div className="overflow-x-auto">
+  <table className="w-full">
+    <thead>
+      <tr className="border-b border-gray-200 text-left">
+        <th className="pb-3">Cliente</th>
+        <th className="pb-3">Contrato</th>
+        <th className="pb-3">Valor</th>
+        <th className="pb-3">Vencimento</th>
+        <th className="pb-3">Status</th>
+        <th className="pb-3">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {charges.map((charge) => (
+        <tr
+          key={charge.id}
+          className="border-b border-gray-100"
+        >
+          <td className="py-4">
+            {charge.client}
+          </td>
+
+          <td className="py-4">
+            {charge.contract}
+          </td>
+
+          <td className="py-4 font-semibold">
+            {charge.amount}
+          </td>
+
+          <td className="py-4">
+            {charge.dueDate}
+          </td>
+
+          <td className="py-4">
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-medium ${
+                charge.status === "Atrasado"
+                  ? "bg-red-100 text-red-700"
+                  : charge.status === "Pendente"
+                  ? "bg-yellow-100 text-yellow-700"
+                  : "bg-green-100 text-green-700"
+              }`}
+            >
+              {charge.status}
+            </span>
+          </td>
+
+          <td className="py-4">
+            <button className="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition">
+              Cobrar
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
       </section>
     </div>
   );
