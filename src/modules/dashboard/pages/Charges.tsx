@@ -23,7 +23,7 @@ export function Charges() {
           </button>
         </div>
 
-        <div className="overflow-x-auto">
+<div className="hidden md:block overflow-x-auto">
   <table className="w-full">
     <thead>
       <tr className="border-b border-gray-200 text-left">
@@ -82,6 +82,55 @@ export function Charges() {
     </tbody>
   </table>
 </div>
+
+{/* Mobile */}
+<div className="md:hidden space-y-4">
+  {charges.map((charge) => (
+    <div
+      key={charge.id}
+      className="border border-gray-200 rounded-xl p-4"
+    >
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="font-semibold text-lg">
+            {charge.client}
+          </h3>
+
+          <p className="text-sm text-gray-500">
+            {charge.contract}
+          </p>
+        </div>
+
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-medium ${
+            charge.status === "Atrasado"
+              ? "bg-red-100 text-red-700"
+              : charge.status === "Pendente"
+              ? "bg-yellow-100 text-yellow-700"
+              : "bg-green-100 text-green-700"
+          }`}
+        >
+          {charge.status}
+        </span>
+      </div>
+
+      <div className="mt-4 space-y-1 text-sm text-gray-600">
+        <p>
+          <strong>Valor:</strong> {charge.amount}
+        </p>
+
+        <p>
+          <strong>Vencimento:</strong> {charge.dueDate}
+        </p>
+      </div>
+
+      <button className="mt-4 w-full px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90">
+        Cobrar
+      </button>
+    </div>
+  ))}
+</div>
+
       </section>
     </div>
   );
