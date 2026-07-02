@@ -1,3 +1,4 @@
+import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
 import { useEffect, useState } from "react";
 import { clients } from "../data/clients";
@@ -48,15 +49,10 @@ export function Clients() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900">
-          Clientes
-        </h1>
-
-        <p className="text-sm text-slate-500 mt-1">
-          Gerencie todos os clientes cadastrados.
-        </p>
-      </div>
+      <PageHeader
+  title="Clientes"
+  description="Gerencie todos os clientes cadastrados."
+/>
 
       <section className="bg-white border border-gray-200 rounded-xl p-6">
         <div className="flex items-center justify-between mb-6">

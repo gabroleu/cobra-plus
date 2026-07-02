@@ -1,3 +1,4 @@
+import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
 import { useEffect, useState } from "react";
 import { contracts } from "../data/contracts"; 
@@ -64,15 +65,10 @@ function handleAddContract() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900">
-          Contratos
-        </h1>
-
-        <p className="text-sm text-slate-500 mt-1">
-          Gerencie todos os contratos cadastrados.
-        </p>
-      </div>
+      <PageHeader
+        title="Contratos"
+        description="Gerencie todos os contratos cadastrados."
+      />
 
       <section className="bg-white border border-gray-200 rounded-xl p-6">
         <div className="flex items-center justify-between mb-6">

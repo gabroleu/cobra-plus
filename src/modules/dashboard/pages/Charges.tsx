@@ -1,3 +1,4 @@
+import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
 import { useEffect, useState } from "react";
 import { charges } from "../data/charges";
@@ -85,15 +86,10 @@ if (!selectedClient || !selectedContract) {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900">
-          Cobranças
-        </h1>
-
-        <p className="text-sm text-slate-500 mt-1">
-          Gerencie todas as cobranças do sistema.
-        </p>
-      </div>
+      <PageHeader
+        title="Cobranças"
+        description="Gerencie todas as cobranças do sistema."
+      />
 
       <section className="bg-white border border-gray-200 rounded-xl p-6">
         <div className="flex items-center justify-between mb-6">

@@ -1,3 +1,4 @@
+import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { MetricCard } from "../../../shared/components/ui/MetricCard";
 import { metrics } from "../data/metrics";
 import { charges } from "../data/charges";
@@ -6,25 +7,19 @@ import { timeline } from "../data/timeline";
 export function Dashboard() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-      <div>
-          <h1 className="text-3xl font-bold text-slate-900">
-              Dashboard
-          </h1>
+      <PageHeader
+  title="Dashboard"
+  description="Acompanhe cobranças, contratos e receba+."
+  actions={
+    <div className="flex items-center gap-2">
+      <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
 
-        <p className="text-sm text-slate-500 mt-1">
-            Acompanhe cobranças, contratos e receba+.
-        </p>
-      </div>
-
-      <div className="flex items-center gap-2">
-  <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-
-  <span className="text-sm text-slate-500 font-medium">
-    Online
-  </span>
-</div>
-      </div>
+      <span className="text-sm text-slate-500 font-medium">
+        Online
+      </span>
+    </div>
+  }
+/>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {metrics.map((item, index) => (
@@ -139,14 +134,14 @@ export function Dashboard() {
         className="border border-gray-100 rounded-xl p-4"
       >
         <div className="flex items-center gap-6">
-  <span className="text-5xl font-bold text-primary">
-    {item.quantity}
-  </span>
+          <span className="text-5xl font-bold text-primary">
+           {item.quantity}
+         </span>
 
-  <div>
-    <p className="text-lg font-medium">
-      {item.label}
-    </p>
+         <div>
+            <p className="text-lg font-medium">
+             {item.label}
+            </p>
 
     <p className="text-2xl font-bold text-slate-800">
       {item.amount}
