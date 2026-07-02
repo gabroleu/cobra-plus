@@ -1,3 +1,4 @@
+import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
 import { useEffect, useState } from "react";
 import { charges } from "../data/charges";
 import { clients } from "../data/clients";
@@ -144,17 +145,7 @@ if (!selectedClient || !selectedContract) {
           </td>
 
           <td className="py-4">
-            <span
-              className={`px-3 py-1 rounded-full text-xs font-medium ${
-                charge.status === "Atrasado"
-                  ? "bg-red-100 text-red-700"
-                  : charge.status === "Pendente"
-                  ? "bg-yellow-100 text-yellow-700"
-                  : "bg-green-100 text-green-700"
-              }`}
-            >
-              {charge.status}
-            </span>
+            <StatusBadge status={charge.status} />
           </td>
 
           <td className="py-4">
