@@ -1,5 +1,87 @@
+import { useEffect, useState } from "react";
 import { charges } from "../data/charges";
+import { clients } from "../data/clients";
+import { contracts } from "../data/contracts";
+
+type Charge = {
+  id: string;
+  client: string;
+  contract: string;
+  amount: string;
+  dueDate: string;
+  status: string;
+};
+
 export function Charges() {
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [chargesList, setChargesList] = useState<Charge[]>(() => {
+  const savedCharges = localStorage.getItem("cobra_charges");
+
+  if (savedCharges) {
+    return JSON.parse(savedCharges) as Charge[];
+  }
+
+  return charges;
+});
+
+const [client, setClient] = useState("");
+const [contract, setContract] = useState("");
+const [amount, setAmount] = useState("");
+const [dueDate, setDueDate] = useState("");
+const [status, setStatus] = useState("Pendente");
+
+useEffect(() => {
+  localStorage.setItem(
+    "cobra_charges",
+    JSON.stringify(chargesList)
+  );
+}, [chargesList]);
+
+
+  function handleAddCharge() {
+  if (
+    !client.trim() ||
+    !contract.trim() ||
+    !amount.trim() ||
+    !dueDate.trim()
+  ) {
+    return;
+  }
+
+  const selectedClient = clients.find(
+  (item) => item.id === client
+);
+
+const selectedContract = contracts.find(
+  (item) => item.id === contract
+);
+
+if (!selectedClient || !selectedContract) {
+  return;
+}
+
+  const newCharge: Charge = {
+  id: Date.now().toString(),
+  client: selectedClient.name,
+  contract: `Contrato ${selectedContract.id.padStart(3, "0")}`,
+  amount,
+  dueDate,
+  status,
+};
+
+  setChargesList((prev) => [...prev, newCharge]);
+
+  setClient("");
+  setContract("");
+  setAmount("");
+  setDueDate("");
+  setStatus("Pendente");
+
+  setShowModal(false);
+}
+
   return (
     <div className="space-y-6">
       <div>
@@ -18,8 +100,11 @@ export function Charges() {
             Lista de Cobranças
           </h2>
 
-          <button className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90">
-            Nova Cobrança
+          <button
+            onClick={() => setShowModal(true)}
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90"
+          >
+              Nova Cobrança
           </button>
         </div>
 
@@ -37,7 +122,7 @@ export function Charges() {
     </thead>
 
     <tbody>
-      {charges.map((charge) => (
+      {chargesList.map((charge) => (
         <tr
           key={charge.id}
           className="border-b border-gray-100"
@@ -85,7 +170,7 @@ export function Charges() {
 
 {/* Mobile */}
 <div className="md:hidden space-y-4">
-  {charges.map((charge) => (
+  {chargesList.map((charge) => (
     <div
       key={charge.id}
       className="border border-gray-200 rounded-xl p-4"
@@ -132,6 +217,144 @@ export function Charges() {
 </div>
 
       </section>
+        {showModal && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+    <div className="bg-white rounded-xl p-6 w-full max-w-lg">
+
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-xl font-semibold">
+          Nova Cobrança
+        </h2>
+
+        <button
+          onClick={() => setShowModal(false)}
+          className="text-gray-500 hover:text-gray-700"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="space-y-4">
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Cliente
+    </label>
+
+    <select
+      value={client}
+      onChange={(e) => {
+      setClient(e.target.value);
+      setContract("");
+  }}
+      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+    >
+    <option value="">
+        Selecione um cliente
+    </option>
+
+  {clients.map((item) => (
+    <option
+      key={item.id}
+      value={item.id}
+    >
+      {item.name}
+    </option>
+  ))}
+</select>
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Contrato
+    </label>
+
+    <select
+  value={contract}
+  onChange={(e) => setContract(e.target.value)}
+  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+>
+  <option value="">
+    Selecione um contrato
+  </option>
+
+  {contracts
+    .filter((item) => item.clientId === client)
+    .map((item) => (
+      <option
+        key={item.id}
+        value={item.id}
+      >
+        {item.id} - {item.amount}
+      </option>
+    ))}
+</select>
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Valor
+    </label>
+
+    <input
+      type="text"
+      value={amount}
+      onChange={(e) => setAmount(e.target.value)}
+      placeholder="R$ 0,00"
+      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Vencimento
+    </label>
+
+    <input
+      type="date"
+      value={dueDate}
+      onChange={(e) => setDueDate(e.target.value)}
+      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Status
+    </label>
+
+    <select
+      value={status}
+      onChange={(e) => setStatus(e.target.value)}
+      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+    >
+      <option>Pendente</option>
+      <option>Atrasado</option>
+      <option>Pago</option>
+    </select>
+  </div>
+
+  <div className="flex justify-end gap-2 pt-2">
+    <button
+      onClick={() => setShowModal(false)}
+      className="px-4 py-2 border rounded-lg"
+    >
+      Cancelar
+    </button>
+
+    <button
+      onClick={handleAddCharge}
+      className="px-4 py-2 bg-primary text-white rounded-lg"
+    >
+      Salvar
+    </button>
+  </div>
+
+</div>
+
+    </div>
+  </div>
+)}
     </div>
   );
 }
