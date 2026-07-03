@@ -1,3 +1,4 @@
+import { Modal } from "../../../shared/components/ui/Modal";
 import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
 import { useEffect, useState } from "react";
@@ -110,69 +111,57 @@ export function Clients() {
 </div>
       </section>
 
-      {showModal && (
-  <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-    <div className="bg-white rounded-xl p-5 w-full max-w-lg mx-4">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">
-          Novo Cliente
-        </h2>
+     {showModal && (
+  <Modal
+    title="Novo Cliente"
+    onClose={() => setShowModal(false)}
+  >
+    <div className="space-y-5">
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Nome
+        </label>
 
-        <button
-          onClick={() => setShowModal(false)}
-          className="text-gray-500 hover:text-gray-700"
-        >
-          ✕
-        </button>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+          placeholder="Digite o nome"
+        />
       </div>
 
-      <div className="space-y-5">
-  <div>
-    <label className="block text-sm font-medium mb-1">
-      Nome
-    </label>
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Telefone
+        </label>
 
-    <input
-      type="text"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-      className="w-full border border-gray-300 rounded-lg px-3 py-2"
-      placeholder="Digite o nome"
-    />
-  </div>
+        <input
+          type="text"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+          placeholder="(92) 99999-9999"
+        />
+      </div>
 
-  <div>
-    <label className="block text-sm font-medium mb-1">
-      Telefone
-    </label>
+      <div className="flex justify-end gap-2 pt-2">
+        <button
+          onClick={() => setShowModal(false)}
+          className="px-4 py-2 border rounded-lg"
+        >
+          Cancelar
+        </button>
 
-    <input
-      type="text"
-      value={phone}
-      onChange={(e) => setPhone(e.target.value)}
-      className="w-full border border-gray-300 rounded-lg px-3 py-2"
-      placeholder="(92) 99999-9999"
-    />
-  </div>
-
-  <div className="flex justify-end gap-2 pt-2">
-    <button
-      onClick={() => setShowModal(false)}
-      className="px-4 py-2 border rounded-lg"
-    >
-      Cancelar
-    </button>
-
-    <button
-      onClick={handleAddClient}
-      className="px-4 py-2 bg-primary text-white rounded-lg"
-    >
-      Salvar
-    </button>
-  </div>
-</div>
+        <button
+          onClick={handleAddClient}
+          className="px-4 py-2 bg-primary text-white rounded-lg"
+        >
+          Salvar
+        </button>
+      </div>
     </div>
-  </div>
+  </Modal>
 )}
       
     </div>

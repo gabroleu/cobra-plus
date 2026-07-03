@@ -1,3 +1,4 @@
+import { Modal } from "../../../shared/components/ui/Modal";
 import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
 import { useEffect, useState } from "react";
@@ -130,104 +131,90 @@ function handleAddContract() {
 </div>
       </section>
 
-        {showModal && (
-  <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-    <div className="bg-white rounded-xl p-6 w-full max-w-lg">
+ {showModal && (
+  <Modal
+    title="Novo Contrato"
+    onClose={() => setShowModal(false)}
+  >
+    <div className="space-y-4">
 
-      <div className="flex items-center justify-between mb-5">
-        <h2 className="text-xl font-semibold">
-          Novo Contrato
-        </h2>
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Cliente
+        </label>
 
+        <select
+          value={client}
+          onChange={(e) => setClient(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+        >
+          <option value="">Selecione um cliente</option>
+          <option>Gabriel Silva</option>
+          <option>Gabriel Chaves</option>
+          <option>Roberto Gabriel</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Valor
+        </label>
+
+        <input
+          type="text"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder="R$ 0,00"
+          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Vencimento
+        </label>
+
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Status
+        </label>
+
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+        >
+          <option>Ativo</option>
+          <option>Inativo</option>
+        </select>
+      </div>
+
+      <div className="flex justify-end gap-2 pt-2">
         <button
           onClick={() => setShowModal(false)}
-          className="text-gray-500 hover:text-gray-700"
+          className="px-4 py-2 border rounded-lg"
         >
-          ✕
+          Cancelar
+        </button>
+
+        <button
+          onClick={handleAddContract}
+          className="px-4 py-2 bg-primary text-white rounded-lg"
+        >
+          Salvar
         </button>
       </div>
 
-      <div className="space-y-4">
-
-  <div>
-    <label className="block text-sm font-medium mb-1">
-      Cliente
-    </label>
-
-    <select
-  value={client}
-  onChange={(e) => setClient(e.target.value)}
-  className="w-full border border-gray-300 rounded-lg px-3 py-2"
->
-  <option value="">Selecione um cliente</option>
-  <option>Gabriel Silva</option>
-  <option>Gabriel Chaves</option>
-  <option>Roberto Gabriel</option>
-</select>
-  </div>
-
-  <div>
-    <label className="block text-sm font-medium mb-1">
-      Valor
-    </label>
-
-    <input
-      type="text"
-      value={amount}
-      onChange={(e) => setAmount(e.target.value)}
-      placeholder="R$ 0,00"
-      className="w-full border border-gray-300 rounded-lg px-3 py-2"
-    />
-  </div>
-
-  <div>
-    <label className="block text-sm font-medium mb-1">
-      Vencimento
-    </label>
-
-    <input
-      type="date"
-      value={dueDate}
-      onChange={(e) => setDueDate(e.target.value)}
-      className="w-full border border-gray-300 rounded-lg px-3 py-2"
-    />
-  </div>
-
-  <div>
-    <label className="block text-sm font-medium mb-1">
-      Status
-    </label>
-
-    <select
-      value={status}
-      onChange={(e) => setStatus(e.target.value)}
-      className="w-full border border-gray-300 rounded-lg px-3 py-2"
-    >
-  <option>Ativo</option>
-  <option>Inativo</option>
-</select>
-  </div>
-
-  <div className="flex justify-end gap-2 pt-2">
-    <button
-      onClick={() => setShowModal(false)}
-      className="px-4 py-2 border rounded-lg"
-    >
-      Cancelar
-    </button>
-
-    <button
-  onClick={handleAddContract}
-  className="px-4 py-2 bg-primary text-white rounded-lg"
->
-  Salvar
-</button>
-  </div>
-
-</div>
-
     </div>
-  </div>
+  </Modal>
 )}
 
 
