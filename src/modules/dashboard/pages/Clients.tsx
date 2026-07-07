@@ -1,3 +1,4 @@
+import { TextInput } from "../../../shared/components/ui/TextInput";
 import { Modal } from "../../../shared/components/ui/Modal";
 import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
@@ -117,33 +118,19 @@ export function Clients() {
     onClose={() => setShowModal(false)}
   >
     <div className="space-y-5">
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Nome
-        </label>
+    <TextInput
+  label="Nome"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+  placeholder="Digite o nome"
+/>
 
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-          placeholder="Digite o nome"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Telefone
-        </label>
-
-        <input
-          type="text"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-          placeholder="(92) 99999-9999"
-        />
-      </div>
+      <TextInput
+  label="Telefone"
+  value={phone}
+  onChange={(e) => setPhone(e.target.value)}
+  placeholder="(92) 99999-9999"
+/>
 
       <div className="flex justify-end gap-2 pt-2">
         <button

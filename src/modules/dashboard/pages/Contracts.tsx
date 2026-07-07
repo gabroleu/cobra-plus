@@ -1,3 +1,4 @@
+import { TextInput } from "../../../shared/components/ui/TextInput";
 import { Modal } from "../../../shared/components/ui/Modal";
 import { PageHeader } from "../../../shared/components/ui/PageHeader";
 import { StatusBadge } from "../../../shared/components/ui/StatusBadge";
@@ -155,32 +156,19 @@ function handleAddContract() {
         </select>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Valor
-        </label>
+      <TextInput
+        label="Valor"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        placeholder="R$ 0,00"
+      />
 
-        <input
-          type="text"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="R$ 0,00"
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Vencimento
-        </label>
-
-        <input
-          type="date"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-        />
-      </div>
+      <TextInput
+        label="Vencimento"
+        type="date"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+      />
 
       <div>
         <label className="block text-sm font-medium mb-1">
