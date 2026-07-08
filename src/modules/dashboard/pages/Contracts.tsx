@@ -1,3 +1,4 @@
+import { SelectInput } from "../../../shared/components/ui/SelectInput";
 import { TextInput } from "../../../shared/components/ui/TextInput";
 import { Modal } from "../../../shared/components/ui/Modal";
 import { PageHeader } from "../../../shared/components/ui/PageHeader";
@@ -139,22 +140,16 @@ function handleAddContract() {
   >
     <div className="space-y-4">
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Cliente
-        </label>
-
-        <select
-          value={client}
-          onChange={(e) => setClient(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-        >
-          <option value="">Selecione um cliente</option>
-          <option>Gabriel Silva</option>
-          <option>Gabriel Chaves</option>
-          <option>Roberto Gabriel</option>
-        </select>
-      </div>
+      <SelectInput
+        label="Cliente"
+        value={client}
+        onChange={(e) => setClient(e.target.value)}
+      >
+        <option value="">Selecione um cliente</option>
+        <option>Gabriel Silva</option>
+        <option>Gabriel Chaves</option>
+        <option>Roberto Gabriel</option>
+      </SelectInput>
 
       <TextInput
         label="Valor"
@@ -170,20 +165,14 @@ function handleAddContract() {
         onChange={(e) => setDueDate(e.target.value)}
       />
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Status
-        </label>
-
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-        >
-          <option>Ativo</option>
-          <option>Inativo</option>
-        </select>
-      </div>
+      <SelectInput
+        label="Status"
+        value={status}
+        onChange={(e) => setStatus(e.target.value)}
+      >
+        <option>Ativo</option>
+        <option>Inativo</option>
+      </SelectInput>
 
       <div className="flex justify-end gap-2 pt-2">
         <button

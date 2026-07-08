@@ -1,3 +1,4 @@
+import { SelectInput } from "../../../shared/components/ui/SelectInput";
 import { TextInput } from "../../../shared/components/ui/TextInput";
 import { Modal } from "../../../shared/components/ui/Modal";
 import { PageHeader } from "../../../shared/components/ui/PageHeader";
@@ -213,51 +214,39 @@ if (!selectedClient || !selectedContract) {
   >
     <div className="space-y-4">
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Cliente
-        </label>
+     <SelectInput
+  label="Cliente"
+  value={client}
+  onChange={(e) => setClient(e.target.value)}
+>
+  <option value="">Selecione um cliente</option>
 
-        <select
-          value={client}
-          onChange={(e) => setClient(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-        >
-          <option value="">Selecione um cliente</option>
+  {clients.map((client) => (
+    <option
+      key={client.id}
+      value={client.id}
+    >
+      {client.name}
+    </option>
+  ))}
+</SelectInput>
 
-{clients.map((client) => (
-  <option
-    key={client.id}
-    value={client.id}
-  >
-    {client.name}
-  </option>
-))}
-        </select>
-      </div>
+      <SelectInput
+  label="Contrato"
+  value={contract}
+  onChange={(e) => setContract(e.target.value)}
+>
+  <option value="">Selecione um contrato</option>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Contrato
-        </label>
-
-        <select
-          value={contract}
-          onChange={(e) => setContract(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-        >
-          <option value="">Selecione um contrato</option>
-
-{contracts.map((contract) => (
-  <option
-    key={contract.id}
-    value={contract.id}
-  >
-    {`Contrato ${contract.id.padStart(3, "0")}`}
-  </option>
-))}
-        </select>
-      </div>
+  {contracts.map((contract) => (
+    <option
+      key={contract.id}
+      value={contract.id}
+    >
+      {`Contrato ${contract.id.padStart(3, "0")}`}
+    </option>
+  ))}
+</SelectInput>
 
       <TextInput
         label="Valor"
@@ -273,21 +262,15 @@ if (!selectedClient || !selectedContract) {
         onChange={(e) => setDueDate(e.target.value)}
       />
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Status
-        </label>
-
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2"
-        >
-          <option>Pendente</option>
-          <option>Atrasado</option>
-          <option>Pago</option>
-        </select>
-      </div>
+     <SelectInput
+  label="Status"
+  value={status}
+  onChange={(e) => setStatus(e.target.value)}
+>
+  <option>Pendente</option>
+  <option>Atrasado</option>
+  <option>Pago</option>
+</SelectInput>
 
       <div className="flex justify-end gap-2 pt-2">
         <button
