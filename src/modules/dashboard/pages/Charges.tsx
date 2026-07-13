@@ -179,7 +179,7 @@ const filteredCharges = chargesList.filter((charge: Charge) => {
   </table>
 </div>
 
-{/* Mobile */}
+{/* Mobile (testando no iphone 15 pro max) */}
 <div className="md:hidden space-y-4">
   {filteredCharges.map((charge) => (
     <div
