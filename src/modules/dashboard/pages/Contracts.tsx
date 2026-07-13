@@ -32,6 +32,8 @@ export function Contracts() {
   const [amount, setAmount] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [status, setStatus] = useState("Ativo");
+  
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
   localStorage.setItem(
@@ -48,6 +50,7 @@ function handleAddContract() {
   ) {
     return;
   }
+
 
   const newContract: Contract = {
     id: Date.now().toString(),
@@ -66,6 +69,15 @@ function handleAddContract() {
 
   setShowModal(false);
 }
+
+const filteredContracts = contractsList.filter((contract: Contract) => {
+  const searchTerm = search.toLowerCase();
+
+  return (
+    contract.client.toLowerCase().includes(searchTerm) ||
+    contract.amount.toLowerCase().includes(searchTerm)
+  );
+});
 
   return (
     <div className="space-y-6">
@@ -88,6 +100,15 @@ function handleAddContract() {
           </button>
         </div>
 
+        <div className="mb-5">
+  <TextInput
+    label="Buscar contrato"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="Digite o nome do cliente ou o valor..."
+  />
+</div>
+
         <div className="overflow-x-auto">
   <table className="w-full">
     <thead>
@@ -101,7 +122,7 @@ function handleAddContract() {
     </thead>
 
     <tbody>
-      {contractsList.map((contract) => (
+      {filteredContracts.map((contract) => (
         <tr
           key={contract.id}
           className="border-b border-gray-100"
