@@ -1,3 +1,4 @@
+import { FilterSelect } from "../../../shared/components/ui/FilterSelect";
 import { SecondaryButton } from "../../../shared/components/ui/SecondaryButton";
 import { PrimaryButton } from "../../../shared/components/ui/PrimaryButton";
 import { TextInput } from "../../../shared/components/ui/TextInput";
@@ -30,6 +31,7 @@ export function Clients() {
   const [phone, setPhone] = useState("");
 
   const [search, setSearch] = useState("");
+  const [filterStatus, setFilterStatus] = useState("Todos");
 
 
   const filteredClients = clientsList.filter((client) => {
@@ -83,14 +85,25 @@ export function Clients() {
           </PrimaryButton>
         </div>
 
-        <div className="mb-5">
+        <div className="mb-5 flex flex-col md:flex-row gap-4">
+  <div className="flex-1">
+    <TextInput
+      label="Buscar cliente"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      placeholder="Digite o nome ou telefone..."
+    />
+  </div>
 
-  <TextInput
-    label="Buscar cliente"
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    placeholder="Digite o nome ou telefone..."
-  />
+  <FilterSelect
+    label="Status"
+    value={filterStatus}
+    onChange={(e) => setFilterStatus(e.target.value)}
+  >
+    <option>Todos</option>
+    <option>Ativo</option>
+    <option>Inativo</option>
+  </FilterSelect>
 </div>
 
         <div className="overflow-x-auto">
