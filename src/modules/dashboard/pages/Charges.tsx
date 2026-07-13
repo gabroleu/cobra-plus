@@ -9,6 +9,7 @@ import { charges } from "../data/charges";
 import { clients } from "../data/clients";
 import { contracts } from "../data/contracts";
 
+
 type Charge = {
   id: string;
   client: string;
@@ -37,6 +38,7 @@ const [contract, setContract] = useState("");
 const [amount, setAmount] = useState("");
 const [dueDate, setDueDate] = useState("");
 const [status, setStatus] = useState("Pendente");
+const [search, setSearch] = useState("");
 
 useEffect(() => {
   localStorage.setItem(
@@ -88,6 +90,15 @@ if (!selectedClient || !selectedContract) {
   setShowModal(false);
 }
 
+const filteredCharges = chargesList.filter((charge: Charge) => {
+  const searchTerm = search.toLowerCase();
+
+  return (
+    charge.client.toLowerCase().includes(searchTerm) ||
+    charge.contract.toLowerCase().includes(searchTerm)
+  );
+});
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -109,6 +120,15 @@ if (!selectedClient || !selectedContract) {
           </button>
         </div>
 
+<div className="mb-5">
+  <TextInput
+    label="Buscar cobrança"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="Digite o cliente ou contrato..."
+  />
+</div>
+
 <div className="hidden md:block overflow-x-auto">
   <table className="w-full">
     <thead>
@@ -123,7 +143,7 @@ if (!selectedClient || !selectedContract) {
     </thead>
 
     <tbody>
-      {chargesList.map((charge) => (
+      {filteredCharges.map((charge) => (
         <tr
           key={charge.id}
           className="border-b border-gray-100"
@@ -161,7 +181,7 @@ if (!selectedClient || !selectedContract) {
 
 {/* Mobile */}
 <div className="md:hidden space-y-4">
-  {chargesList.map((charge) => (
+  {filteredCharges.map((charge) => (
     <div
       key={charge.id}
       className="border border-gray-200 rounded-xl p-4"
