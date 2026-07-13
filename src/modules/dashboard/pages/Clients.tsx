@@ -1,3 +1,5 @@
+import { SecondaryButton } from "../../../shared/components/ui/SecondaryButton";
+import { PrimaryButton } from "../../../shared/components/ui/PrimaryButton";
 import { TextInput } from "../../../shared/components/ui/TextInput";
 import { Modal } from "../../../shared/components/ui/Modal";
 import { PageHeader } from "../../../shared/components/ui/PageHeader";
@@ -62,12 +64,11 @@ export function Clients() {
             Lista de Clientes
           </h2>
 
-          <button
+          <PrimaryButton
             onClick={() => setShowModal(true)}
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90"
           >
-               Novo Cliente
-          </button>
+            Novo Cliente
+          </PrimaryButton>
         </div>
 
         <div className="overflow-x-auto">
@@ -133,19 +134,17 @@ export function Clients() {
 />
 
       <div className="flex justify-end gap-2 pt-2">
-        <button
+        <SecondaryButton
           onClick={() => setShowModal(false)}
-          className="px-4 py-2 border rounded-lg"
         >
           Cancelar
-        </button>
+        </SecondaryButton>
 
-        <button
+        <PrimaryButton
           onClick={handleAddClient}
-          className="px-4 py-2 bg-primary text-white rounded-lg"
         >
           Salvar
-        </button>
+        </PrimaryButton>
       </div>
     </div>
   </Modal>

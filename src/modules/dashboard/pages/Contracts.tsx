@@ -1,3 +1,4 @@
+import { SecondaryButton } from "../../../shared/components/ui/SecondaryButton";
 import { SelectInput } from "../../../shared/components/ui/SelectInput";
 import { TextInput } from "../../../shared/components/ui/TextInput";
 import { Modal } from "../../../shared/components/ui/Modal";
@@ -175,12 +176,11 @@ function handleAddContract() {
       </SelectInput>
 
       <div className="flex justify-end gap-2 pt-2">
-        <button
+        <SecondaryButton
           onClick={() => setShowModal(false)}
-          className="px-4 py-2 border rounded-lg"
         >
           Cancelar
-        </button>
+        </SecondaryButton>
 
         <button
           onClick={handleAddContract}
