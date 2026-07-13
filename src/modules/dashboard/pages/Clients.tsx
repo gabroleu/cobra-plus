@@ -29,6 +29,18 @@ export function Clients() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
+  const [search, setSearch] = useState("");
+
+
+  const filteredClients = clientsList.filter((client) => {
+  const searchTerm = search.toLowerCase();
+
+  return (
+    client.name.toLowerCase().includes(searchTerm) ||
+    client.phone.toLowerCase().includes(searchTerm)
+  );
+});
+
     useEffect(() => {
     localStorage.setItem("cobra_clients", JSON.stringify(clientsList));
   }, [clientsList]);
@@ -71,6 +83,16 @@ export function Clients() {
           </PrimaryButton>
         </div>
 
+        <div className="mb-5">
+
+  <TextInput
+    label="Buscar cliente"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="Digite o nome ou telefone..."
+  />
+</div>
+
         <div className="overflow-x-auto">
   <table className="w-full">
     <thead>
@@ -83,7 +105,7 @@ export function Clients() {
     </thead>
 
     <tbody>
-      {clientsList.map((client) => (
+      {filteredClients.map((client) => (
         <tr
           key={client.id}
           className="border-b border-gray-100"
