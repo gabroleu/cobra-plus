@@ -37,10 +37,15 @@ export function Clients() {
   const filteredClients = clientsList.filter((client) => {
   const searchTerm = search.toLowerCase();
 
-  return (
+  const matchesSearch =
     client.name.toLowerCase().includes(searchTerm) ||
-    client.phone.toLowerCase().includes(searchTerm)
-  );
+    client.phone.toLowerCase().includes(searchTerm);
+
+  const matchesStatus =
+    filterStatus === "Todos" ||
+    client.status === filterStatus;
+
+  return matchesSearch && matchesStatus;
 });
 
     useEffect(() => {

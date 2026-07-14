@@ -1,3 +1,4 @@
+import { FilterSelect } from "../../../shared/components/ui/FilterSelect";
 import { SecondaryButton } from "../../../shared/components/ui/SecondaryButton";
 import { SelectInput } from "../../../shared/components/ui/SelectInput";
 import { TextInput } from "../../../shared/components/ui/TextInput";
@@ -39,6 +40,8 @@ const [amount, setAmount] = useState("");
 const [dueDate, setDueDate] = useState("");
 const [status, setStatus] = useState("Pendente");
 const [search, setSearch] = useState("");
+const [filterStatus, setFilterStatus] = useState("Todas");
+
 
 useEffect(() => {
   localStorage.setItem(
@@ -93,10 +96,15 @@ if (!selectedClient || !selectedContract) {
 const filteredCharges = chargesList.filter((charge: Charge) => {
   const searchTerm = search.toLowerCase();
 
-  return (
+  const matchesSearch =
     charge.client.toLowerCase().includes(searchTerm) ||
-    charge.contract.toLowerCase().includes(searchTerm)
-  );
+    charge.contract.toLowerCase().includes(searchTerm);
+
+  const matchesStatus =
+    filterStatus === "Todas" ||
+    charge.status === filterStatus;
+
+  return matchesSearch && matchesStatus;
 });
 
   return (
@@ -120,13 +128,26 @@ const filteredCharges = chargesList.filter((charge: Charge) => {
           </button>
         </div>
 
-<div className="mb-5">
-  <TextInput
-    label="Buscar cobrança"
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    placeholder="Digite o cliente ou contrato..."
-  />
+<div className="mb-5 flex flex-col md:flex-row gap-4">
+  <div className="flex-1">
+    <TextInput
+      label="Buscar cobrança"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      placeholder="Digite o cliente ou contrato..."
+    />
+  </div>
+
+  <FilterSelect
+    label="Status"
+    value={filterStatus}
+    onChange={(e) => setFilterStatus(e.target.value)}
+  >
+    <option>Todas</option>
+    <option>Pendente</option>
+    <option>Pago</option>
+    <option>Atrasado</option>
+  </FilterSelect>
 </div>
 
 <div className="hidden md:block overflow-x-auto">

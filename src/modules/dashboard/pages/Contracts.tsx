@@ -1,3 +1,4 @@
+import { FilterSelect } from "../../../shared/components/ui/FilterSelect";
 import { SecondaryButton } from "../../../shared/components/ui/SecondaryButton";
 import { SelectInput } from "../../../shared/components/ui/SelectInput";
 import { TextInput } from "../../../shared/components/ui/TextInput";
@@ -34,6 +35,7 @@ export function Contracts() {
   const [status, setStatus] = useState("Ativo");
   
   const [search, setSearch] = useState("");
+  const [filterStatus, setFilterStatus] = useState("Todos");
 
   useEffect(() => {
   localStorage.setItem(
@@ -73,10 +75,15 @@ function handleAddContract() {
 const filteredContracts = contractsList.filter((contract: Contract) => {
   const searchTerm = search.toLowerCase();
 
-  return (
+  const matchesSearch =
     contract.client.toLowerCase().includes(searchTerm) ||
-    contract.amount.toLowerCase().includes(searchTerm)
-  );
+    contract.amount.toLowerCase().includes(searchTerm);
+
+  const matchesStatus =
+    filterStatus === "Todos" ||
+    contract.status === filterStatus;
+
+  return matchesSearch && matchesStatus;
 });
 
   return (
@@ -100,13 +107,25 @@ const filteredContracts = contractsList.filter((contract: Contract) => {
           </button>
         </div>
 
-        <div className="mb-5">
-  <TextInput
-    label="Buscar contrato"
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    placeholder="Digite o nome do cliente ou o valor..."
-  />
+        <div className="mb-5 flex flex-col md:flex-row gap-4">
+  <div className="flex-1">
+    <TextInput
+      label="Buscar contrato"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      placeholder="Digite o nome do cliente ou o valor..."
+    />
+  </div>
+
+  <FilterSelect
+    label="Status"
+    value={filterStatus}
+    onChange={(e) => setFilterStatus(e.target.value)}
+  >
+    <option>Todos</option>
+    <option>Ativo</option>
+    <option>Inativo</option>
+  </FilterSelect>
 </div>
 
         <div className="overflow-x-auto">
